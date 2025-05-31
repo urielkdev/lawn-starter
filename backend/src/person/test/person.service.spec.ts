@@ -79,17 +79,14 @@ describe('PersonService', () => {
       expect(result).toEqual(personMock);
     });
 
-    it('should return null if no person is found', async () => {
-      const personId = '123';
+    it('should throw NotFoundException if person is not found', async () => {
+      const personId = 'non-existent-id';
 
       prismaService.person.findFirst = jest.fn().mockResolvedValue(null);
 
-      const result = await personService.getById(personId);
-
-      expect(prismaService.person.findFirst).toHaveBeenCalledWith({
-        where: { id: personId },
-      });
-      expect(result).toBeNull();
+      await expect(personService.getById(personId)).rejects.toThrow(
+        `Person with id ${personId} not found`,
+      );
     });
   });
 });

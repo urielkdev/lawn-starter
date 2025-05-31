@@ -1,6 +1,6 @@
 import { PersonService } from './person.service';
 import { PersonView } from './person.view';
-import { Controller, Get, Param, Put } from '@nestjs/common';
+import { Controller, Get, Param, Put, Query } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 
 @ApiTags('Person')
@@ -18,9 +18,16 @@ export class PersonController {
   }
 
   @Get(':id')
-  async getUserSummaryByCategory(@Param('id') id: string) {
+  async getById(@Param('id') id: string) {
     const person = await this.personService.getById(id);
 
     return this.personView.renderGetById(person);
+  }
+
+  @Get()
+  async getListBySearchParam(@Query('search-param') searchParam: string) {
+    const people = await this.personService.getListBySearchParam(searchParam);
+
+    return this.personView.renderGetListBySearchParam(people);
   }
 }

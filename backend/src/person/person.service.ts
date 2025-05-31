@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { Person } from '@prisma/client';
 import { PrismaService } from 'src/prisma/prisma.service';
 
@@ -26,9 +26,27 @@ export class PersonService {
   }
 
   async getById(id: string) {
-    return await this.prismaService.person.findFirst({
+    const people = await this.prismaService.person.findFirst({
       where: {
         id,
+      },
+    });
+
+    if (!people) {
+      throw new NotFoundException(`Person with id ${id} not found`);
+    }
+
+    return people;
+  }
+
+  async getListBySearchParam(searchParam: string) {
+    // TODO: paginate this
+    return await this.prismaService.person.findMany({
+      where: {
+        name: {
+          contains: searchParam,
+          mode: 'insensitive',
+        },
       },
     });
   }
