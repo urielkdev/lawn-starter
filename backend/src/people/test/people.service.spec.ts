@@ -83,6 +83,7 @@ describe('PeopleService', () => {
 
       expect(prismaService.person.findFirst).toHaveBeenCalledWith({
         where: { id: peopleId },
+        include: { movies: true },
       });
       expect(result).toEqual(peopleMock);
     });

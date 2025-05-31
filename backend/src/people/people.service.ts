@@ -29,6 +29,9 @@ export class PeopleService {
       where: {
         id,
       },
+      include: {
+        movies: true,
+      },
     });
 
     if (!person) {

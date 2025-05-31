@@ -1,5 +1,5 @@
 import { faker } from '@faker-js/faker';
-import { Person } from '@prisma/client';
+import { Movie, Person } from '@prisma/client';
 import * as Factory from 'factory.ts';
 
 export const personFactory = Factory.Sync.makeFactory<Person>({
@@ -12,6 +12,15 @@ export const personFactory = Factory.Sync.makeFactory<Person>({
   gender: faker.color.human(),
   height: faker.number.int({ min: 150, max: 200 }).toString(),
   mass: faker.number.int({ min: 50, max: 100 }).toString(),
+  createdAt: faker.date.past(),
+  updatedAt: faker.date.recent(),
+});
+
+export const movieFactory = Factory.Sync.makeFactory<Movie>({
+  id: faker.string.uuid(),
+  uid: faker.string.uuid(),
+  name: faker.commerce.department(),
+  openingCrawl: faker.lorem.paragraph(),
   createdAt: faker.date.past(),
   updatedAt: faker.date.recent(),
 });
