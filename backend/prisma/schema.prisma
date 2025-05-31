@@ -11,7 +11,7 @@ datasource db {
 }
 
 model Person {
-  id        String @id @default(cuid())
+  id        String @id @default(uuid())
   uid       String @unique
   name      String
   birthYear String @map("birth_year")
