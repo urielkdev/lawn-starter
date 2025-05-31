@@ -1,5 +1,5 @@
 -- CreateTable
-CREATE TABLE "person" (
+CREATE TABLE "people" (
     "id" TEXT NOT NULL,
     "uid" TEXT NOT NULL,
     "name" TEXT NOT NULL,
@@ -12,8 +12,8 @@ CREATE TABLE "person" (
     "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updated_at" TIMESTAMP(3) NOT NULL,
 
-    CONSTRAINT "person_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "people_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateIndex
-CREATE UNIQUE INDEX "person_uid_key" ON "person"("uid");
+CREATE UNIQUE INDEX "people_uid_key" ON "people"("uid");

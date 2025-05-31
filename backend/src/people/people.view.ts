@@ -1,6 +1,6 @@
 import { Person } from '@prisma/client';
 
-export class PersonView {
+export class PeopleView {
   renderGetById(person: Person) {
     return {
       id: person.id,
@@ -18,9 +18,9 @@ export class PersonView {
 
   renderGetListBySearchParam(people: Person[]) {
     return {
-      people: people.map((person) => ({
-        id: person.id,
-        name: person.name,
+      people: people.map((people) => ({
+        id: people.id,
+        name: people.name,
       })),
       pagination: {
         // TODO: Implement real pagination
