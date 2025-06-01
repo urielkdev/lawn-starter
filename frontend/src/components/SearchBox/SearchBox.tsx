@@ -6,7 +6,7 @@ const SearchBox: React.FC = () => {
   const [query, setQuery] = useState('');
 
   return (
-    <div className="search-box">
+    <div className="search-box-container">
       <p>What are you searching for?</p>
       <div className="radio-group">
         <label>

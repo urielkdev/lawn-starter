@@ -1,11 +1,11 @@
-.results-list {
+.results-list-container {
   background: white;
   padding: 1.5rem;
-  border-radius: 6px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   min-width: 400px;
   max-width: 90vw;
-  box-sizing: border-box;
+  border-radius: 2px;
+  box-shadow: 0 0.5px 1px 0 var(--warm-grey-75);
+  border: solid 0.5px var(--pinkish-grey);
 }
 
 .result-item {
