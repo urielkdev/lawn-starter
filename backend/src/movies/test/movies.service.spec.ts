@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { PrismaService } from 'src/prisma/prisma.service';
-import { fetchAllMoviesFactory } from 'test/factories';
+import { fetchAllMoviesFactory, movieFactory } from 'test/factories';
 
 import { SwapiApiService } from 'src/swapi-api/swapi-api.service';
 
@@ -70,6 +70,31 @@ describe('MoviesService', () => {
         .mockRejectedValue(new Error('Error'));
 
       await expect(moviesService.populate()).rejects.toThrow('Error');
+    });
+  });
+
+  describe('getListBySearchParam', () => {
+    beforeEach(() => {
+      jest.clearAllMocks();
+    });
+
+    it('should call functions with correct params', async () => {
+      const searchParam = 'test';
+      const moviesMock = movieFactory.buildList(2);
+
+      prismaService.movie.findMany = jest.fn().mockResolvedValue(moviesMock);
+
+      const result = await moviesService.getListBySearchParam(searchParam);
+
+      expect(prismaService.movie.findMany).toHaveBeenCalledWith({
+        where: {
+          title: {
+            contains: searchParam,
+            mode: 'insensitive',
+          },
+        },
+      });
+      expect(result).toEqual(moviesMock);
     });
   });
 });

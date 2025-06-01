@@ -33,4 +33,15 @@ export class MoviesService {
       }),
     );
   }
+
+  async getListBySearchParam(searchParam: string) {
+    return await this.prismaService.movie.findMany({
+      where: {
+        title: {
+          contains: searchParam,
+          mode: 'insensitive',
+        },
+      },
+    });
+  }
 }

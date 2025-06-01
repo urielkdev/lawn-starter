@@ -1,6 +1,6 @@
 import { MoviesService } from './movies.service';
 import { MoviesView } from './movies.view';
-import { Controller, Put } from '@nestjs/common';
+import { Controller, Get, Put, Query } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 
 @ApiTags('Movies')
@@ -15,5 +15,12 @@ export class MoviesController {
   async populate() {
     await this.moviesService.populate();
     return { message: 'Movies populated successfully' };
+  }
+
+  @Get()
+  async getListBySearchParam(@Query('search-param') searchParam: string) {
+    const movies = await this.moviesService.getListBySearchParam(searchParam);
+
+    return this.moviesView.renderGetListBySearchParam(movies);
   }
 }
