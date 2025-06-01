@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 
 import { SwapiApiService } from 'src/swapi-api/swapi-api.service';
@@ -32,6 +32,23 @@ export class MoviesService {
         });
       }),
     );
+  }
+
+  async getById(id: string) {
+    const movie = await this.prismaService.movie.findFirst({
+      where: {
+        id,
+      },
+      include: {
+        people: true,
+      },
+    });
+
+    if (!movie) {
+      throw new NotFoundException(`Movie with id ${id} not found`);
+    }
+
+    return movie;
   }
 
   async getListBySearchParam(searchParam: string) {

@@ -1,6 +1,6 @@
 import { MoviesService } from './movies.service';
 import { MoviesView } from './movies.view';
-import { Controller, Get, Put, Query } from '@nestjs/common';
+import { Controller, Get, Param, Put, Query } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 
 @ApiTags('Movies')
@@ -15,6 +15,13 @@ export class MoviesController {
   async populate() {
     await this.moviesService.populate();
     return { message: 'Movies populated successfully' };
+  }
+
+  @Get(':id')
+  async getById(@Param('id') id: string) {
+    const movie = await this.moviesService.getById(id);
+
+    return this.moviesView.renderGetById(movie);
   }
 
   @Get()

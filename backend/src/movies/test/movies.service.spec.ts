@@ -73,6 +73,37 @@ describe('MoviesService', () => {
     });
   });
 
+  describe('getById', () => {
+    beforeEach(() => {
+      jest.clearAllMocks();
+    });
+
+    it('should call functions with correct params', async () => {
+      const moviesMock = movieFactory.build();
+      const movieId = moviesMock.id;
+
+      prismaService.movie.findFirst = jest.fn().mockResolvedValue(moviesMock);
+
+      const result = await moviesService.getById(movieId);
+
+      expect(prismaService.movie.findFirst).toHaveBeenCalledWith({
+        where: { id: movieId },
+        include: { people: true },
+      });
+      expect(result).toEqual(moviesMock);
+    });
+
+    it('should throw NotFoundException if movie is not found', async () => {
+      const movieId = 'non-existent-id';
+
+      prismaService.movie.findFirst = jest.fn().mockResolvedValue(null);
+
+      await expect(moviesService.getById(movieId)).rejects.toThrow(
+        `Movie with id ${movieId} not found`,
+      );
+    });
+  });
+
   describe('getListBySearchParam', () => {
     beforeEach(() => {
       jest.clearAllMocks();
