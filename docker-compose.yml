@@ -18,6 +18,8 @@ services:
       context: ./backend
       dockerfile: Dockerfile
     container_name: star-wars-api
+    depends_on:
+      - db
     environment:
       - PORT=3000
     ports:
