@@ -1,0 +1,35 @@
+.search-box {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 6px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  min-width: 300px;
+  max-width: 90vw;
+  box-sizing: border-box;
+}
+
+.radio-group {
+  display: flex;
+  gap: 1rem;
+  margin: 0.5rem 0;
+  flex-wrap: wrap;
+}
+
+.search-box input[type='text'] {
+  width: 100%;
+  padding: 0.5rem;
+  margin: 0.5rem 0;
+  box-sizing: border-box;
+}
+
+.search-box button {
+  width: 100%;
+  background-color: #0ab463;
+  color: #fff;
+  border: none;
+  padding: 0.6rem;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 20px;
+  font-size: 1rem;
+}

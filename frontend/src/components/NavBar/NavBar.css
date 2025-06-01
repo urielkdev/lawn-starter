@@ -1,0 +1,11 @@
+.navbar {
+  background-color: white;
+  padding: 1rem;
+  border-bottom: 1px solid #ddd;
+  text-align: center;
+}
+
+.navbar h1 {
+  margin: 0;
+  color: #0ab463;
+}
