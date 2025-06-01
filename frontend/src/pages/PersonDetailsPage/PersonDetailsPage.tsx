@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import type { Person } from '../../types';
 import './PersonDetailsPage.css';
 
@@ -46,12 +47,14 @@ const PersonDetailsPage: React.FC = () => {
           {person.movies.map((movie) => (
             <p key={movie.id}>
               {/* TODO: react-router-dom to navigate to /movies/{movie.id} */}
-              <a href={`#movies/${movie.id}`}>{movie.title}</a>
+              <Link to={`/movies/${movie.id}`}>{movie.title}</Link>
             </p>
           ))}
         </div>
       </div>
-      <button className="back-button">BACK TO SEARCH</button>
+      <Link className="back-button" to="/">
+        BACK TO SEARCH
+      </Link>
     </div>
   );
 };
