@@ -20,6 +20,7 @@ export class MoviesService {
           update: {
             ...movie,
             people: {
+              // TODO: fix this when the uid does not exist in the database
               connect: peopleUids.map((uid) => ({ uid })),
             },
           },
