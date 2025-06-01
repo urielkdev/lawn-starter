@@ -1,3 +1,15 @@
+export interface Movie {
+  id: string;
+  title: string;
+  openingCrawl: string;
+  people: PersonSimplified[];
+}
+
+export interface PersonSimplified {
+  id: string;
+  name: string;
+}
+
 export interface Person {
   id: string;
   name: string;

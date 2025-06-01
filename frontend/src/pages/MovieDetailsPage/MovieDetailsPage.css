@@ -1,19 +1,14 @@
-/* TODO: break all -container in another component, //repeated code... */
-.details-container {
+.movie-container {
   background: #fff;
   margin: 2rem auto;
   padding: 2rem;
-  max-width: 800px;
+  max-width: 900px;
   border-radius: 2px;
   box-shadow: 0 0.5px 1px 0 var(--warm-grey-75);
   border: solid 0.5px var(--pinkish-grey);
 }
 
-h2 {
-  margin-top: 0;
-}
-
-.details-grid {
+.movie-grid {
   display: flex;
   justify-content: space-between;
   gap: 2rem;
@@ -21,20 +16,23 @@ h2 {
   flex-wrap: wrap;
 }
 
-.details-section {
+.movie-section {
   flex: 1;
   min-width: 250px;
 }
 
-.details-section h3 {
+.movie-section h3 {
   margin-bottom: 0.5rem;
 }
 
-.details-section hr {
+.movie-section hr {
   margin-bottom: 1rem;
 }
 
-/* TODO: break all -buttons in another component, //repeated code... */
+.movie-section p {
+  margin-bottom: 1rem;
+}
+
 .back-button {
   margin-top: 2rem;
   background-color: var(--green-teal);

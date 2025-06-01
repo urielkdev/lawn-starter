@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import Navbar from './components/NavBar/NavBar';
-import PersonDetailsPage from './pages/PersonDetailsPage/PersonDetailsPage';
+import MovieDetailsPage from './pages/MovieDetailsPage/MovieDetailsPage';
 
 const App: React.FC = () => {
   return (
@@ -9,7 +9,8 @@ const App: React.FC = () => {
       <Navbar />
       <div className="main-content">
         {/* <HomePage /> */}
-        <PersonDetailsPage />
+        {/* <PersonDetailsPage /> */}
+        <MovieDetailsPage />
       </div>
     </div>
   );

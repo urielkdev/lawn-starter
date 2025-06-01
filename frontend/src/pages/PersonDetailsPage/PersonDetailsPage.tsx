@@ -24,24 +24,26 @@ const personMock: Person = {
 };
 
 const PersonDetailsPage: React.FC = () => {
+  const person = personMock; // Replace with actual movie data from API
+
   return (
     <div className="details-container">
-      <h2>{personMock.name}</h2>
+      <h2>{person.name}</h2>
       <div className="details-grid">
         <div className="details-section">
           <h3>Details</h3>
           <hr />
-          <p>Birth Year: {personMock.birthYear}</p>
-          <p>Gender: {personMock.gender}</p>
-          <p>Eye Color: {personMock.eyeColor}</p>
-          <p>Hair Color: {personMock.hairColor}</p>
-          <p>Height: {personMock.height}</p>
-          <p>Mass: {personMock.mass}</p>
+          <p>Birth Year: {person.birthYear}</p>
+          <p>Gender: {person.gender}</p>
+          <p>Eye Color: {person.eyeColor}</p>
+          <p>Hair Color: {person.hairColor}</p>
+          <p>Height: {person.height}</p>
+          <p>Mass: {person.mass}</p>
         </div>
         <div className="details-section">
           <h3>Movies</h3>
           <hr />
-          {personMock.movies.map((movie) => (
+          {person.movies.map((movie) => (
             <p key={movie.id}>
               {/* TODO: react-router-dom to navigate to /movies/{movie.id} */}
               <a href={`#movies/${movie.id}`}>{movie.title}</a>
