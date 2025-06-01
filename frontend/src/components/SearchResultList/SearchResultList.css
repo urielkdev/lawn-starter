@@ -24,8 +24,8 @@
 }
 
 .result-item button {
-  background-color: #0ab463;
-  color: white;
+  background-color: var(--green-teal);
+  color: #fff;
   border: none;
   padding: 0.4rem 1rem;
   font-weight: bold;

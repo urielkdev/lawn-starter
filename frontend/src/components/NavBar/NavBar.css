@@ -1,5 +1,5 @@
 .navbar {
-  background-color: white;
+  background-color: #fff;
   padding: 1rem;
   border-bottom: 1px solid #ddd;
   text-align: center;
@@ -7,5 +7,5 @@
 
 .navbar h1 {
   margin: 0;
-  color: #0ab463;
+  color: var(--green-teal);
 }

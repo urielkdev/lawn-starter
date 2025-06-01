@@ -24,7 +24,7 @@
 
 .search-box button {
   width: 100%;
-  background-color: #0ab463;
+  background-color: var(--green-teal);
   color: #fff;
   border: none;
   padding: 0.6rem;
