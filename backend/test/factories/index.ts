@@ -1,6 +1,7 @@
 import { faker } from '@faker-js/faker';
 import { Movie, Person } from '@prisma/client';
 import * as Factory from 'factory.ts';
+import { SwapiApiMovieDTO } from 'src/types';
 
 export const personFactory = Factory.Sync.makeFactory<Person>({
   id: faker.string.uuid(),
@@ -24,6 +25,15 @@ export const movieFactory = Factory.Sync.makeFactory<Movie>({
   createdAt: faker.date.past(),
   updatedAt: faker.date.recent(),
 });
+
+export const fetchAllMoviesFactory = Factory.Sync.makeFactory<SwapiApiMovieDTO>(
+  {
+    uid: faker.string.uuid(),
+    title: faker.commerce.department(),
+    openingCrawl: faker.lorem.paragraph(),
+    peopleUids: [`base_url/people/${faker.string.uuid()}`],
+  },
+);
 
 export const swapiApiPersonFactory = Factory.Sync.makeFactory({
   uid: faker.string.uuid(),

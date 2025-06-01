@@ -1,6 +1,6 @@
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { MoviesModule } from './movies/movie.module';
+import { MoviesModule } from './movies/movies.module';
 import { PeopleModule } from './people/people.module';
 import { PrismaModule } from './prisma/prisma.module';
 import { Module } from '@nestjs/common';
