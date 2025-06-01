@@ -29,7 +29,7 @@ model Person {
 model Movie {
   id           String @id @default(uuid())
   uid          String @unique
-  name         String
+  title        String
   openingCrawl String @map("opening_crawl")
 
   createdAt DateTime @default(now()) @map("created_at")

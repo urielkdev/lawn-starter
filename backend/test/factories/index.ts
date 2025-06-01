@@ -19,7 +19,7 @@ export const personFactory = Factory.Sync.makeFactory<Person>({
 export const movieFactory = Factory.Sync.makeFactory<Movie>({
   id: faker.string.uuid(),
   uid: faker.string.uuid(),
-  name: faker.commerce.department(),
+  title: faker.commerce.department(),
   openingCrawl: faker.lorem.paragraph(),
   createdAt: faker.date.past(),
   updatedAt: faker.date.recent(),
@@ -35,5 +35,14 @@ export const swapiApiPersonFactory = Factory.Sync.makeFactory({
     gender: faker.color.human(),
     height: faker.number.int({ min: 150, max: 200 }).toString(),
     mass: faker.number.int({ min: 50, max: 100 }).toString(),
+  },
+});
+
+export const swapiApiMovieFactory = Factory.Sync.makeFactory({
+  uid: faker.string.uuid(),
+  properties: {
+    title: faker.commerce.department(),
+    opening_crawl: faker.lorem.paragraph(),
+    characters: [`base_url/people/${faker.string.uuid()}`],
   },
 });

@@ -2,7 +2,7 @@
 CREATE TABLE "movies" (
     "id" TEXT NOT NULL,
     "uid" TEXT NOT NULL,
-    "name" TEXT NOT NULL,
+    "title" TEXT NOT NULL,
     "opening_crawl" TEXT NOT NULL,
     "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updated_at" TIMESTAMP(3) NOT NULL,

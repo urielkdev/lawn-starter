@@ -1,5 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { swapiApiPersonFactory } from 'test/factories';
+import { swapiApiMovieFactory, swapiApiPersonFactory } from 'test/factories';
 
 import { SwapiApiService } from '../swapi-api.service';
 
@@ -117,6 +117,51 @@ describe('SwapiApiService', () => {
       global.fetch = jest.fn().mockRejectedValue(new Error('Network error'));
 
       await expect(swapiApiService.fetchAllPeople()).rejects.toThrow(
+        'Network error',
+      );
+    });
+  });
+
+  describe('fetchAllMovies', () => {
+    it('should fetch and map all movies', async () => {
+      const mockApiResponse = { result: swapiApiMovieFactory.buildList(1) };
+
+      const movie = mockApiResponse.result[0];
+      const movieProperties = movie.properties;
+
+      global.fetch = jest.fn().mockResolvedValue({
+        json: jest.fn().mockResolvedValue(mockApiResponse),
+      } as any);
+
+      const result = await swapiApiService.fetchAllMovies();
+
+      expect(global.fetch).toHaveBeenCalledTimes(1);
+      expect(result).toEqual([
+        {
+          uid: movie.uid,
+          title: movieProperties.title,
+          openingCrawl: movieProperties.opening_crawl,
+          peopleUids: movieProperties.characters.map(
+            (character: string) => character.split('people/')[1],
+          ),
+        },
+      ]);
+    });
+
+    it('should return an empty array if no movies', async () => {
+      global.fetch = jest.fn().mockResolvedValue({
+        json: jest.fn().mockResolvedValue({ result: [] }),
+      } as any);
+
+      const result = await swapiApiService.fetchAllMovies();
+
+      expect(result).toEqual([]);
+    });
+
+    it('should throw if fetch fails', async () => {
+      global.fetch = jest.fn().mockRejectedValue(new Error('Network error'));
+
+      await expect(swapiApiService.fetchAllMovies()).rejects.toThrow(
         'Network error',
       );
     });

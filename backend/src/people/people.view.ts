@@ -1,8 +1,7 @@
 import { Movie, Person } from '@prisma/client';
 
 export class PeopleView {
-  renderGetById(person: Person & { movies: Partial<Movie>[] }) {
-    console.log('renderGetById', person);
+  renderGetById(person: Person & { movies: Movie[] }) {
     return {
       id: person.id,
       name: person.name,
@@ -12,7 +11,10 @@ export class PeopleView {
       hairColor: person.hairColor,
       height: person.height,
       mass: person.mass,
-      movies: person.movies,
+      movies: person.movies.map((movie) => ({
+        id: movie.id,
+        title: movie.title,
+      })),
       createdAt: person.createdAt,
       updatedAt: person.updatedAt,
     };
