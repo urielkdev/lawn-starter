@@ -35,6 +35,11 @@
   text-decoration: none;
 }
 
+.p-no-result {
+  font-weight: bold;
+  color: var(--pinkish-grey);
+}
+
 @media (max-width: 768px) {
   .result-item {
     flex-direction: column;

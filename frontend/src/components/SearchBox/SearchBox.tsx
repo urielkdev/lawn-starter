@@ -1,10 +1,22 @@
-import React, { useState } from 'react';
+import React from 'react';
+import type { SearchType } from '../../types';
 import './SearchBox.css';
 
-const SearchBox: React.FC = () => {
-  const [type, setType] = useState<'people' | 'movies'>('people');
-  const [query, setQuery] = useState('');
+interface SearchBoxProps {
+  searchType: SearchType;
+  setSearchType: React.Dispatch<React.SetStateAction<SearchType>>;
+  searchQuery: string;
+  setSearchQuery: React.Dispatch<React.SetStateAction<string>>;
+  handleSearch: () => Promise<void>;
+}
 
+const SearchBox: React.FC<SearchBoxProps> = ({
+  searchType,
+  setSearchType,
+  searchQuery,
+  setSearchQuery,
+  handleSearch,
+}) => {
   return (
     <div className="search-box-container">
       <p>What are you searching for?</p>
@@ -13,8 +25,8 @@ const SearchBox: React.FC = () => {
           <input
             type="radio"
             value="people"
-            checked={type === 'people'}
-            onChange={() => setType('people')}
+            checked={searchType === 'people'}
+            onChange={() => setSearchType('people')}
           />
           People
         </label>
@@ -22,8 +34,8 @@ const SearchBox: React.FC = () => {
           <input
             type="radio"
             value="movies"
-            checked={type === 'movies'}
-            onChange={() => setType('movies')}
+            checked={searchType === 'movies'}
+            onChange={() => setSearchType('movies')}
           />
           Movies
         </label>
@@ -31,10 +43,10 @@ const SearchBox: React.FC = () => {
       <input
         type="text"
         placeholder="Search..."
-        value={query}
-        onChange={(e) => setQuery(e.target.value)}
+        value={searchQuery}
+        onChange={(e) => setSearchQuery(e.target.value)}
       />
-      <button>SEARCH</button>
+      <button onClick={() => handleSearch()}>SEARCH</button>
     </div>
   );
 };

@@ -26,3 +26,7 @@ export interface MovieSimplified {
   id: string;
   title: string;
 }
+
+export type SearchType = 'people' | 'movies';
+
+export type SearchResults = PersonSimplified[] | MovieSimplified[];
