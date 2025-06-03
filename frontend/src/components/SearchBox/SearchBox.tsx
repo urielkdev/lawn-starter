@@ -1,5 +1,5 @@
 import React from 'react';
-import type { SearchType } from '../../types';
+import { SearchTypeEnum, type SearchType } from '../../types';
 import './SearchBox.css';
 
 interface SearchBoxProps {
@@ -25,8 +25,8 @@ const SearchBox: React.FC<SearchBoxProps> = ({
           <input
             type="radio"
             value="people"
-            checked={searchType === 'people'}
-            onChange={() => setSearchType('people')}
+            checked={searchType === SearchTypeEnum.PEOPLE}
+            onChange={() => setSearchType(SearchTypeEnum.PEOPLE)}
           />
           People
         </label>
@@ -34,8 +34,8 @@ const SearchBox: React.FC<SearchBoxProps> = ({
           <input
             type="radio"
             value="movies"
-            checked={searchType === 'movies'}
-            onChange={() => setSearchType('movies')}
+            checked={searchType === SearchTypeEnum.MOVIES}
+            onChange={() => setSearchType(SearchTypeEnum.MOVIES)}
           />
           Movies
         </label>
@@ -43,7 +43,7 @@ const SearchBox: React.FC<SearchBoxProps> = ({
       <input
         type="text"
         placeholder={
-          searchType === 'people'
+          searchType === SearchTypeEnum.PEOPLE
             ? 'e.g. Chewbacca, Yoda, Boba Fett'
             : 'e.g. Jedi, New Hope'
         }

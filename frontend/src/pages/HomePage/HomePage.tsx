@@ -2,15 +2,24 @@ import React, { useState } from 'react';
 import { starWarsApi } from '../../apis';
 import SearchBox from '../../components/SearchBox/SearchBox';
 import SearchResultList from '../../components/SearchResultList/SearchResultList';
-import type { SearchResults, SearchType } from '../../types';
+import {
+  SearchTypeEnum,
+  type SearchResults,
+  type SearchType,
+} from '../../types';
 
 const HomePage: React.FC = () => {
-  const [searchType, setSearchType] = useState<SearchType>('people');
-  const [resultSearchType, setResultSearchType] =
-    useState<SearchType>('people');
+  const [searchType, setSearchType] = useState<SearchType>(
+    SearchTypeEnum.PEOPLE
+  );
+  const [resultSearchType, setResultSearchType] = useState<SearchType>(
+    SearchTypeEnum.PEOPLE
+  );
   const [searchQuery, setSearchQuery] = useState('');
   const [isSearching, setIsSearching] = useState(false);
   const [results, setResults] = useState<SearchResults>([]);
+
+  // TODO: useSearchParams to handle back buttons // useSearchParams()
 
   const handleSearch = async () => {
     setResultSearchType(searchType);
@@ -24,7 +33,6 @@ const HomePage: React.FC = () => {
 
     try {
       // await new Promise((resolve) => setTimeout(resolve, 1000)); // Simulate network delay
-
       const data = await starWarsApi.getListBySearchParam(
         searchType,
         searchQuery
