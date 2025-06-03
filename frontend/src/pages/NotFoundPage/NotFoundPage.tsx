@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
+import { LinkWithQueryParams } from '../../components/LinkWithQueryParams/LinkWithQueryParams';
 import './NotFoundPage.css';
 
 const NotFoundPage = () => {
@@ -17,9 +18,9 @@ const NotFoundPage = () => {
       <div className="not-found-container">
         <h1>404</h1>
         <p>Oops! Page not found</p>
-        <Link className="back-button" to="/">
+        <LinkWithQueryParams className="back-button" to="/">
           Return to Home
-        </Link>
+        </LinkWithQueryParams>
       </div>
     </div>
   );

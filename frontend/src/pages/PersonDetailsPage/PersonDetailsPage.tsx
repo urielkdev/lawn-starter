@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { starWarsApi } from '../../apis';
+import { LinkWithQueryParams } from '../../components/LinkWithQueryParams/LinkWithQueryParams';
 import { SearchTypeEnum, type Person } from '../../types';
 import './PersonDetailsPage.css';
 
@@ -52,17 +53,19 @@ const PersonDetailsPage: React.FC = () => {
             <div className="details-section">
               <h3>Movies</h3>
               <hr />
-              {person.movies.map((movie) => (
-                <p key={movie.id}>
-                  {/* TODO: react-router-dom to navigate to /movies/{movie.id} */}
-                  <Link to={`/movies/${movie.id}`}>{movie.title}</Link>
-                </p>
+              {person.movies.map((movie, index) => (
+                <div key={movie.id}>
+                  <LinkWithQueryParams to={`/movies/${movie.id}`}>
+                    {movie.title}
+                  </LinkWithQueryParams>
+                  {index < person.movies.length - 1 && ', '}
+                </div>
               ))}
             </div>
           </div>
-          <Link className="back-button" to="/">
+          <LinkWithQueryParams className="back-button" to="/">
             BACK TO SEARCH
-          </Link>
+          </LinkWithQueryParams>
         </>
       )}
     </div>

@@ -1,6 +1,6 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import type { SearchResults, SearchType } from '../../types';
+import { LinkWithQueryParams } from '../LinkWithQueryParams/LinkWithQueryParams';
 import './SearchResultList.css';
 
 interface SearchResultListProps {
@@ -21,22 +21,30 @@ const SearchResultList: React.FC<SearchResultListProps> = ({
       <hr />
       {/* TODO: styling center these <p> */}
       {isSearching ? (
-        <p className="p-no-result">Searching...</p>
+        <div className="p-no-result">
+          <p>Searching...</p>
+        </div>
       ) : results.length === 0 ? (
-        <p className="p-no-result">
-          There are zero matches. Use the form to search for People or Movies.
-        </p>
+        <div className="p-no-result">
+          <p>
+            There are zero matches.
+            <br /> Use the form to search for People or Movies.
+          </p>
+        </div>
       ) : (
         results.map((result) => (
-          <div key={result.id} className="result-item">
-            <span>{'name' in result ? result.name : result.title}</span>
-            <Link
-              className="result-item-button"
-              to={`/${searchType}/${result.id}`}
-            >
-              SEE DETAILS
-            </Link>
-          </div>
+          <>
+            <div key={result.id} className="result-item">
+              <span>{'name' in result ? result.name : result.title}</span>
+              <LinkWithQueryParams
+                className="result-item-button"
+                to={`/${searchType}/${result.id}`}
+              >
+                SEE DETAILS
+              </LinkWithQueryParams>
+            </div>
+            <hr />
+          </>
         ))
       )}
     </div>

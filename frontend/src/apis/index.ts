@@ -56,7 +56,6 @@ async function getOneById(
   if (!response.ok) {
     throw new Error(result.message);
   }
-  console.log(result);
 
   return searchType === SearchTypeEnum.PEOPLE
     ? (result as Person)
