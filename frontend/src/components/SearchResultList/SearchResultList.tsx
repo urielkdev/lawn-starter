@@ -15,6 +15,7 @@ const SearchResultList: React.FC<SearchResultListProps> = ({
   results,
 }) => {
   return (
+    // TODO: this card should be the same width everywhere and with scrolling
     <div className="results-list-container">
       <h3>Results</h3>
       <hr />

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { starWarsApi } from '../../apis';
 import SearchBox from '../../components/SearchBox/SearchBox';
 import SearchResultList from '../../components/SearchResultList/SearchResultList';
 import type { SearchResults, SearchType } from '../../types';
@@ -22,20 +23,14 @@ const HomePage: React.FC = () => {
     setIsSearching(true);
 
     try {
-      await new Promise((resolve) => setTimeout(resolve, 1000)); // Simulate network delay until we use the real API
-      setResults([
-        {
-          id: '80e6a96e-936c-4375-b2b4-3c0679ca39cb',
-          name: 'Luke Skywalker',
-        },
-        {
-          id: 'ac61e3d6-bdd1-4383-857e-59b2cbafe05a',
-          name: 'Luminara Unduli',
-        },
-      ]);
-      // TODO: Replace with actual API call
-      // const data = await api...(searchType, searchQuery);
-      // setResults(searchType === "people" ? data.people || [] : data.movies || []);
+      // await new Promise((resolve) => setTimeout(resolve, 1000)); // Simulate network delay
+
+      const data = await starWarsApi.getListBySearchParam(
+        searchType,
+        searchQuery
+      );
+
+      setResults(data);
     } catch (error) {
       console.error('Search error:', error);
       setResults([]);

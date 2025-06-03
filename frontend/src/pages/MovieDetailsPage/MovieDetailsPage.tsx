@@ -31,7 +31,7 @@ const MovieDetailsPage: React.FC = () => {
         <div className="movie-section">
           <h3>Opening Crawl</h3>
           <hr />
-          <p>{movie.openingCrawl}</p>
+          <p className="white-spacing-pre">{movie.openingCrawl}</p>
         </div>
         <div className="movie-section">
           <h3>Characters</h3>

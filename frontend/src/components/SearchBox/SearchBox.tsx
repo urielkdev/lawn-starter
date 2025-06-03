@@ -42,7 +42,11 @@ const SearchBox: React.FC<SearchBoxProps> = ({
       </div>
       <input
         type="text"
-        placeholder="Search..."
+        placeholder={
+          searchType === 'people'
+            ? 'e.g. Chewbacca, Yoda, Boba Fett'
+            : 'e.g. Jedi, New Hope'
+        }
         value={searchQuery}
         onChange={(e) => setSearchQuery(e.target.value)}
       />
