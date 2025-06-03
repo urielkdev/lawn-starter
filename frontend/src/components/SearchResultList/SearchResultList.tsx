@@ -33,8 +33,8 @@ const SearchResultList: React.FC<SearchResultListProps> = ({
         </div>
       ) : (
         results.map((result) => (
-          <>
-            <div key={result.id} className="result-item">
+          <div key={result.id}>
+            <div className="result-item">
               <span>{'name' in result ? result.name : result.title}</span>
               <LinkWithQueryParams
                 className="result-item-button"
@@ -44,7 +44,7 @@ const SearchResultList: React.FC<SearchResultListProps> = ({
               </LinkWithQueryParams>
             </div>
             <hr />
-          </>
+          </div>
         ))
       )}
     </div>

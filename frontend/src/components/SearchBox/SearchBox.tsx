@@ -49,6 +49,12 @@ const SearchBox: React.FC<SearchBoxProps> = ({
         }
         value={searchQuery}
         onChange={(e) => setSearchQuery(e.target.value)}
+        onKeyDown={async (e) => {
+          if (e.key === 'Enter') {
+            e.preventDefault();
+            await handleSearch();
+          }
+        }}
       />
       <button onClick={() => handleSearch()}>SEARCH</button>
     </div>
