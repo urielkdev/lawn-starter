@@ -29,4 +29,9 @@ export interface MovieSimplified {
 
 export type SearchType = 'people' | 'movies';
 
+export const SearchTypeEnum: { [key: string]: SearchType } = {
+  PEOPLE: 'people',
+  MOVIES: 'movies',
+};
+
 export type SearchResults = PersonSimplified[] | MovieSimplified[];

@@ -1,60 +1,70 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import type { Person } from '../../types';
+import React, { useCallback, useEffect, useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import { starWarsApi } from '../../apis';
+import { SearchTypeEnum, type Person } from '../../types';
 import './PersonDetailsPage.css';
 
-const personMock: Person = {
-  id: '0eb267f5-f6c9-42ae-8000-73d3d8ce15b1',
-  name: 'Lobot',
-  birthYear: '37BBY',
-  gender: 'male',
-  eyeColor: 'blue',
-  hairColor: 'none',
-  height: '175',
-  mass: '79',
-  movies: [
-    {
-      id: 'ade279d9-14a9-480d-939e-2607d99ff855',
-      title: 'The Empire Strikes Back',
-    },
-    {
-      id: 'e33ae81c-71e6-4757-b095-29dcbd4ad194',
-      title: 'A New Hope',
-    },
-  ],
-};
-
 const PersonDetailsPage: React.FC = () => {
-  const person = personMock; // Replace with actual movie data from API
+  const location = useLocation();
+  const id = location.pathname.split('/').pop() || '';
+
+  const [person, setPerson] = useState<Person | null>(null);
+  const [isSearching, setIsSearching] = useState(false);
+
+  const handleFetchPerson = useCallback(async () => {
+    setIsSearching(true);
+
+    try {
+      // await new Promise((resolve) => setTimeout(resolve, 1000)); // Simulate network delay
+      const data = await starWarsApi.getOneById(SearchTypeEnum.PEOPLE, id);
+
+      setPerson(data as Person);
+    } catch (error) {
+      // TODO: if 404, redirect to 404 page
+      console.error('Search error:', error);
+    } finally {
+      setIsSearching(false);
+    }
+  }, [id]);
+
+  useEffect(() => {
+    handleFetchPerson();
+  }, [handleFetchPerson]);
 
   return (
     <div className="details-container">
-      <h2>{person.name}</h2>
-      <div className="details-grid">
-        <div className="details-section">
-          <h3>Details</h3>
-          <hr />
-          <p>Birth Year: {person.birthYear}</p>
-          <p>Gender: {person.gender}</p>
-          <p>Eye Color: {person.eyeColor}</p>
-          <p>Hair Color: {person.hairColor}</p>
-          <p>Height: {person.height}</p>
-          <p>Mass: {person.mass}</p>
-        </div>
-        <div className="details-section">
-          <h3>Movies</h3>
-          <hr />
-          {person.movies.map((movie) => (
-            <p key={movie.id}>
-              {/* TODO: react-router-dom to navigate to /movies/{movie.id} */}
-              <Link to={`/movies/${movie.id}`}>{movie.title}</Link>
-            </p>
-          ))}
-        </div>
-      </div>
-      <Link className="back-button" to="/">
-        BACK TO SEARCH
-      </Link>
+      {isSearching || !person ? (
+        <p className="p-no-result">Searching...</p>
+      ) : (
+        <>
+          <h2>{person.name}</h2>
+          <div className="details-grid">
+            <div className="details-section">
+              <h3>Details</h3>
+              <hr />
+              <p>Birth Year: {person.birthYear}</p>
+              <p>Gender: {person.gender}</p>
+              <p>Eye Color: {person.eyeColor}</p>
+              <p>Hair Color: {person.hairColor}</p>
+              <p>Height: {person.height}</p>
+              <p>Mass: {person.mass}</p>
+            </div>
+            <div className="details-section">
+              <h3>Movies</h3>
+              <hr />
+              {person.movies.map((movie) => (
+                <p key={movie.id}>
+                  {/* TODO: react-router-dom to navigate to /movies/{movie.id} */}
+                  <Link to={`/movies/${movie.id}`}>{movie.title}</Link>
+                </p>
+              ))}
+            </div>
+          </div>
+          <Link className="back-button" to="/">
+            BACK TO SEARCH
+          </Link>
+        </>
+      )}
     </div>
   );
 };

@@ -1,6 +1,7 @@
 import {
-  type MovieSimplified,
-  type PersonSimplified,
+  SearchTypeEnum,
+  type Movie,
+  type Person,
   type SearchResults,
   type SearchType,
 } from '../types';
@@ -13,7 +14,9 @@ const getListBySearchParam = async (
   searchQuery: string
 ) => {
   const url =
-    searchType === 'people' ? `${BASE_URL}/people` : `${BASE_URL}/movies`;
+    searchType === SearchTypeEnum.PEOPLE
+      ? `${BASE_URL}/people`
+      : `${BASE_URL}/movies`;
 
   const response = await fetch(`${url}?search-param=${searchQuery}`, {
     method: 'GET',
@@ -31,12 +34,36 @@ const getListBySearchParam = async (
   }
 
   return (
-    searchType === 'people'
-      ? (result.people as PersonSimplified[])
-      : (result.movies as MovieSimplified[])
+    searchType === SearchTypeEnum.PEOPLE ? result.people : result.movies
   ) as SearchResults;
 };
 
+async function getOneById(
+  searchType: 'people' | 'movies',
+  id: string
+): Promise<Person | Movie> {
+  const url = `${BASE_URL}/${searchType}`;
+
+  const response = await fetch(`${url}/${id}`, {
+    method: 'GET',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+  });
+
+  const result = await response.json();
+  if (!response.ok) {
+    throw new Error(result.message);
+  }
+  console.log(result);
+
+  return searchType === SearchTypeEnum.PEOPLE
+    ? (result as Person)
+    : (result as Movie);
+}
+
 export const starWarsApi = {
   getListBySearchParam,
+  getOneById,
 };
