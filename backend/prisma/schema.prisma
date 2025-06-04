@@ -52,3 +52,12 @@ model Log {
 
   @@map("logs")
 }
+
+model Statistic {
+  id        String   @id @default(uuid())
+  type      String
+  data      Json
+  createdAt DateTime @default(now())
+
+  @@map("statistics")
+}

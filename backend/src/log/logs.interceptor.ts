@@ -40,7 +40,7 @@ export class LogsInterceptor implements NestInterceptor {
           routeParams: JSON.stringify(request.params),
           method: request.method,
           durationMs: duration,
-          statusCode: response.statusCode,
+          statusCode: statusCode,
         };
 
         this.logService.log(logData);
