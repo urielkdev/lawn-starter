@@ -29,7 +29,7 @@ export interface MovieSimplified {
 
 export type SearchType = 'people' | 'movies';
 
-export const SearchTypeEnum: { [key: string]: SearchType } = {
+export const SearchTypeEnum: Record<string, SearchType> = {
   PEOPLE: 'people',
   MOVIES: 'movies',
 };

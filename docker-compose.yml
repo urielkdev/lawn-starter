@@ -4,6 +4,12 @@ services:
   db:
     image: postgres:14.7
     restart: always
+    healthcheck:
+      test: pg_isready --dbname=star_wars --username=postgres
+      interval: 5s
+      timeout: 50s
+      retries: 5
+      start_period: 10s
     ports:
       - '5432:5432'
     environment:
@@ -19,11 +25,26 @@ services:
       dockerfile: Dockerfile
     container_name: star-wars-api
     depends_on:
-      - db
+      db:
+        condition: service_healthy
     environment:
       - PORT=3000
+      - SWAPI_API_URL=https://swapi.tech/api
+      - DATABASE_URL=postgresql://postgres:postgres@db:5432/star_wars?schema=public
     ports:
       - '3000:3000'
+
+  star-wars-frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: star-wars-frontend
+    depends_on:
+      - star-wars-api
+    environment:
+      - VITE_STAR_WARS_API_BASE_URL=http://localhost:3000
+    ports:
+      - '4173:4173'
 
 volumes:
   pgdata:

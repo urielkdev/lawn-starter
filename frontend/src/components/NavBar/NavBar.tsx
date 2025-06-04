@@ -1,5 +1,5 @@
 import React from 'react';
-import './Navbar.css';
+import './NavBar.css';
 
 const Navbar: React.FC = () => (
   <nav className="navbar">
