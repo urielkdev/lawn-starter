@@ -41,7 +41,7 @@ export class StatisticsService {
           data: statisticResult,
         };
 
-        this.create(createData);
+        await this.create(createData);
       }),
     );
   }

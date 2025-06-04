@@ -19,6 +19,26 @@ services:
     volumes:
       - pgdata:/var/lib/postgresql/data
 
+  localstack:
+    container_name: locakstack
+    image: localstack/localstack
+    ports:
+      - '127.0.0.1:4566:4566'
+      - '127.0.0.1:4510-4559:4510-4559'
+    environment:
+      # LocalStack configuration: https://docs.localstack.cloud/references/configuration/
+      - DEBUG=1
+      # TODO: create queue automatically
+    healthcheck:
+      test: ['CMD-SHELL', 'curl -f http://localhost:4566/health || exit 1']
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 20s
+    volumes:
+      - '${LOCALSTACK_VOLUME_DIR:-./volume}:/var/lib/localstack'
+      - '/var/run/docker.sock:/var/run/docker.sock'
+
   star-wars-api:
     build:
       context: ./backend
@@ -48,3 +68,4 @@ services:
 
 volumes:
   pgdata:
+  localstack_data:

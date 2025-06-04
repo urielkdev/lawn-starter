@@ -5,6 +5,6 @@ import { Module } from '@nestjs/common';
 @Module({
   controllers: [StatisticsController],
   providers: [StatisticsService],
-  exports: [],
+  exports: [StatisticsService],
 })
 export class StatisticsModule {}
