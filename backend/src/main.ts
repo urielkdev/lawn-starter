@@ -1,4 +1,5 @@
 import { AppModule } from './app.module';
+import { LogsInterceptor } from './log/logs.interceptor';
 import { ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
@@ -12,6 +13,8 @@ const bootstrap = async () => {
       transformOptions: { enableImplicitConversion: true },
     }),
   );
+
+  app.useGlobalInterceptors(app.get(LogsInterceptor));
 
   const config = new DocumentBuilder()
     .setTitle('Star Wars Backend')

@@ -39,3 +39,16 @@ model Movie {
 
   @@map("movies")
 }
+
+model Log {
+  id          String   @id @default(uuid())
+  route       String
+  routeParams String   @map("route_params")
+  queryParams String   @map("query_params")
+  method      String
+  durationMs  Int
+  statusCode  Int
+  createdAt   DateTime @default(now())
+
+  @@map("logs")
+}
