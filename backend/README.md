@@ -1,14 +1,34 @@
 ## Description
 
-TODO
+Backend built with NestJS, using Prisma as the ORM.
 
-## Installation
+(For decisions and a more detailed description, see the [main README.md](../README.md))
+
+Swagger run in `/docs`
+
+[Insomnia collection ready to import](./insomnia_lawnstarter_star_wars_api.yaml)
+
+## Note
+
+It is strongly recommended to run all applications using docker-compose for a better experience.  
+To run with docker-compose, refer to the [main README.md](../README.md).
+
+## Installation and Running Without Docker
+
+### Prerequisites
+
+- Copy `.env.example`, rename it to `.env`, and fill in the correct values
+- SQS queue
+- Database
+- Node.js 20+
+
+### Install Dependencies
 
 ```bash
 $ yarn install
 ```
 
-## Setup database
+### Database Setup
 
 - Run:
 
@@ -16,29 +36,29 @@ $ yarn install
 $ yarn prisma migrate dev
 ```
 
-## Running the app without Docker
+### Running the Application
 
 ```bash
-# development
+# Development
 $ yarn start
 
-# watch mode
+# Watch mode
 $ yarn start:dev
 
-# production mode
+# Production mode
 $ yarn build
 $ yarn start:prod
 ```
 
-To test if the application is running just go to localhost:3000/health
+To verify the application is running, visit `localhost:3000/health`.
 
-## Test
+## Testing
 
 ```bash
 $ yarn test
 ```
 
-## To view/edit database data
+## View/Edit Database Data
 
 ```bash
 $ yarn db-studio
@@ -46,19 +66,18 @@ $ yarn db-studio
 
 ## Features
 
-#### Routes
+### Routes
 
-- [x] PUT /people - Populate people table
-- [x] GET /people - Get the list of people with search-param
-- [x] GET /people/:id - Get person by id
-- [x] PUT /movies - Populate movies table
-- [x] GET /movies - Get the list of movies with search-param
-- [x] GET /movies/:id - Get person by id
+- [x] PUT /people - Populate the people table
+- [x] GET /people - Retrieve a list of people filtered by search-param
+- [x] GET /people/:id - Retrieve a person by ID
+- [x] PUT /movies - Populate the movies table
+- [x] GET /movies - Retrieve a list of movies filtered by search-param
+- [x] GET /movies/:id - Retrieve a movie by ID
+- [x] PUT /statistics - Populate the statistics table
+- [x] GET /statistics - Retrieve a list of statistics
 
 ### TODO
 
-- Exercise (3) - statistics
-- Cron to populate both people and movies
-- Create more tests
-- Create pagination to routes that list multiple records
-- Fix the "// TODO" in the code
+- Add more tests
+- Fix the "// TODO" comments in the code

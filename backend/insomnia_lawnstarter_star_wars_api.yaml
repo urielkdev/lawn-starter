@@ -1,0 +1,219 @@
+type: collection.insomnia.rest/5.0
+name: Star Wars Api
+meta:
+  id: wrk_3882e9b8b36f4bf38cda5b015d235a9a
+  created: 1748718783934
+  modified: 1748718783934
+collection:
+  - name: People
+    meta:
+      id: fld_85b9e0c5dba647bb95bcbc9914a3e22d
+      created: 1748718831733
+      modified: 1748736159011
+      sortKey: -1748718831733
+    children:
+      - url: "{{ _.base_url }}/people/:id"
+        name: Get by Id
+        meta:
+          id: req_2133cec8a7b94b4093ccac1b60acec1a
+          created: 1748718834148
+          modified: 1749100703117
+          isPrivate: false
+          sortKey: -1748718834148
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/11.1.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+        pathParameters:
+          - name: id
+            value: 06fe93ee-6d15-4b15-a5a4-2f6ae7225ec4
+      - url: "{{ _.base_url }}/people/populate"
+        name: Populate
+        meta:
+          id: req_541cdaa0be8842bfb47f0b5c6450284d
+          created: 1748720898444
+          modified: 1748729629191
+          isPrivate: false
+          sortKey: -1748718834248
+        method: PUT
+        headers:
+          - name: User-Agent
+            value: insomnia/11.1.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.base_url }}/people"
+        name: Get List
+        meta:
+          id: req_2f9ed73a877a47eb9c027586cad6dddc
+          created: 1748726146578
+          modified: 1749058236917
+          isPrivate: false
+          sortKey: -1748459953947.5
+        method: GET
+        parameters:
+          - id: pair_b3bd2e4ed65744f6bb01b79996b58da1
+            name: search-param
+            value: lu
+            disabled: true
+        headers:
+          - name: User-Agent
+            value: insomnia/11.1.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - name: Movies
+    meta:
+      id: fld_0ee50522be3746b3a12684eb41920389
+      created: 1748736152196
+      modified: 1749051393693
+      sortKey: -1748654111622.75
+    children:
+      - url: "{{ _.base_url }}/movies/:id"
+        name: Get by Id
+        meta:
+          id: req_93111cb80b0c4792b6e56ee882c345ae
+          created: 1748736152198
+          modified: 1749058617462
+          isPrivate: false
+          sortKey: -1748718834148
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/11.1.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+        pathParameters:
+          - name: id
+            value: a
+      - url: "{{ _.base_url }}/movies/populate"
+        name: Populate
+        meta:
+          id: req_755f04ac62004921925fb297278c83f2
+          created: 1748736152199
+          modified: 1748736163091
+          isPrivate: false
+          sortKey: -1748718834248
+        method: PUT
+        headers:
+          - name: User-Agent
+            value: insomnia/11.1.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.base_url }}/movies"
+        name: Get List
+        meta:
+          id: req_3464ba1a508d4ae8b306f9a308d6e0e4
+          created: 1748736152200
+          modified: 1749057002390
+          isPrivate: false
+          sortKey: -1748459953947.5
+        method: GET
+        parameters:
+          - id: pair_b3bd2e4ed65744f6bb01b79996b58da1
+            name: search-param
+            value: the
+            disabled: false
+        headers:
+          - name: User-Agent
+            value: insomnia/11.1.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - name: Statistics
+    meta:
+      id: fld_e96bac9e0b5c4d878d58e8d4a7b083b4
+      created: 1749051387911
+      modified: 1749051392313
+      sortKey: -1748589391512.5
+    children:
+      - url: "{{ _.base_url }}/statistics"
+        name: Generate
+        meta:
+          id: req_9a8ef996b5b24331bd7aaaca4a7d2a18
+          created: 1749051407931
+          modified: 1749051421888
+          isPrivate: false
+          sortKey: -1749051410912
+        method: POST
+        headers:
+          - name: User-Agent
+            value: insomnia/11.1.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.base_url }}/statistics"
+        name: Get List
+        meta:
+          id: req_05e37902a53647c689d5eb71ad73d72d
+          created: 1749051586108
+          modified: 1749051587780
+          isPrivate: false
+          sortKey: -1748885122580
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/11.1.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+cookieJar:
+  name: Default Jar
+  meta:
+    id: jar_c564016a57265a66ee0bd6bc41955fd5f373613e
+    created: 1748718783943
+    modified: 1748718783943
+environments:
+  name: local
+  meta:
+    id: env_c564016a57265a66ee0bd6bc41955fd5f373613e
+    created: 1748718783941
+    modified: 1748718843817
+    isPrivate: false
+  data:
+    base_url: http://localhost:3000
