@@ -9,35 +9,36 @@ import { StatisticsModule } from 'src/statistics/statistics.module';
   imports: [
     StatisticsModule,
     SqsModule.register({
-      // TODO: put in environment variables
       consumers: [
         {
-          name: 'myConsumer1',
+          name: 'statistics-queue-consumer',
           queueUrl:
-            'http://sqs.us-east-1.localhost.localstack.cloud:4566/000000000000/statistics-queue',
-          region: 'us-east-1',
+            process.env.STATISTICS_QUEUE_URL ||
+            'http://localhost:9324/queue/statistics-queue',
+          region: process.env.AWS_REGION || 'elasticmq',
           sqs: new SQSClient({
-            endpoint: 'http://localhost:4566',
-            region: 'us-east-1',
+            endpoint: process.env.SQS_ENDPOINT || 'http://localhost:9324',
+            region: process.env.AWS_REGION || 'elasticmq',
             credentials: {
-              accessKeyId: 'test',
-              secretAccessKey: 'test',
+              accessKeyId: process.env.AWS_ACCESS_KEY_ID || 'x',
+              secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY || 'x',
             },
           }),
         },
       ],
       producers: [
         {
-          name: 'myProducer1',
+          name: 'statistics-queue-producer',
           queueUrl:
-            'http://sqs.us-east-1.localhost.localstack.cloud:4566/000000000000/statistics-queue',
-          region: 'us-east-1',
+            process.env.STATISTICS_QUEUE_URL ||
+            'http://localhost:9324/queue/statistics-queue',
+          region: process.env.AWS_REGION || 'elasticmq',
           sqs: new SQSClient({
-            endpoint: 'http://localhost:4566',
-            region: 'us-east-1',
+            endpoint: process.env.SQS_ENDPOINT || 'http://localhost:9324',
+            region: process.env.AWS_REGION || 'elasticmq',
             credentials: {
-              accessKeyId: 'test',
-              secretAccessKey: 'test',
+              accessKeyId: process.env.AWS_ACCESS_KEY_ID || 'x',
+              secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY || 'x',
             },
           }),
         },

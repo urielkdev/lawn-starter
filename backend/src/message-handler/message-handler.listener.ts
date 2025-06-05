@@ -1,35 +1,38 @@
 import { Message } from '@aws-sdk/client-sqs';
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { SqsConsumerEventHandler, SqsMessageHandler } from '@ssut/nestjs-sqs';
 import { StatisticsService } from 'src/statistics/statistics.service';
 
 @Injectable()
 export class MessageHandlerListener {
+  private readonly logger = new Logger('MessageHandlerListener');
+
   constructor(private readonly statisticsService: StatisticsService) {}
 
-  @SqsMessageHandler('myConsumer1', false)
+  @SqsMessageHandler('statistics-queue-consumer', false)
   public async handleMessage(message: Message) {
-    console.log(1);
     const body = message.Body ? JSON.parse(message.Body) : {};
 
-    console.log(message.Body);
+    this.logger.log(`Message body (raw): ${message.Body}`);
 
     if (body.command === 'generate-statistics') {
-      // TODO: change console.logs with nest logger
-      console.log('Handling generate-statistics command');
       await this.statisticsService.generate();
+      this.logger.log('Command "generate-statistics" processed successfully.');
     } else {
-      console.log('Unknown command:', body.command);
+      this.logger.warn(`Unknown command: ${body.command}`);
     }
-    console.log(2);
+    this.logger.log('Message processing finished.');
   }
+  // TODO: create DLQ to handle errors
 
-  @SqsConsumerEventHandler('myConsumer1', 'processing_error')
+  @SqsConsumerEventHandler('statistics-queue', 'processing_error')
   public onProcessingError(error: Error, message: Message) {
-    // report errors here
-    console.log('error');
-    console.error(error);
-    console.error(message);
-    console.log('error222');
+    this.logger.error('--- SQS PROCESSING ERROR ---');
+    this.logger.error(`Error: ${error}`);
+    this.logger.error(
+      `SQS message that caused the error: ${
+        message ? message.Body : 'Message body unavailable'
+      }`,
+    );
   }
 }

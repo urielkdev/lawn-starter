@@ -19,25 +19,16 @@ services:
     volumes:
       - pgdata:/var/lib/postgresql/data
 
-  localstack:
-    container_name: locakstack
-    image: localstack/localstack
+  elasticmq:
+    image: softwaremill/elasticmq
+    container_name: elasticmq
     ports:
-      - '127.0.0.1:4566:4566'
-      - '127.0.0.1:4510-4559:4510-4559'
+      - '9324:9324'
+      - '9325:9325'
     environment:
-      # LocalStack configuration: https://docs.localstack.cloud/references/configuration/
-      - DEBUG=1
-      # TODO: create queue automatically
-    healthcheck:
-      test: ['CMD-SHELL', 'curl -f http://localhost:4566/health || exit 1']
-      interval: 10s
-      timeout: 5s
-      retries: 5
-      start_period: 20s
+      - JAVA_OPTS=-Dconfig.file=/opt/elasticmq.conf
     volumes:
-      - '${LOCALSTACK_VOLUME_DIR:-./volume}:/var/lib/localstack'
-      - '/var/run/docker.sock:/var/run/docker.sock'
+      - ./elasticmq/custom.conf:/opt/elasticmq.conf
 
   star-wars-api:
     build:
@@ -47,10 +38,10 @@ services:
     depends_on:
       db:
         condition: service_healthy
-    environment:
-      - PORT=3000
-      - SWAPI_API_URL=https://swapi.tech/api
-      - DATABASE_URL=postgresql://postgres:postgres@db:5432/star_wars?schema=public
+      elasticmq:
+        condition: service_started
+    env_file:
+      - ./backend/.env.docker
     ports:
       - '3000:3000'
 
@@ -68,4 +59,6 @@ services:
 
 volumes:
   pgdata:
-  localstack_data:
+
+networks:
+  default:

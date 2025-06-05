@@ -9,5 +9,6 @@ import { SwapiApiModule } from 'src/swapi-api/swapi-api.module';
   controllers: [MoviesController],
   providers: [MoviesService, MoviesView],
   imports: [SwapiApiModule],
+  exports: [MoviesService],
 })
 export class MoviesModule {}

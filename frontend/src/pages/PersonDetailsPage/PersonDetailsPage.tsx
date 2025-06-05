@@ -22,6 +22,7 @@ const PersonDetailsPage: React.FC = () => {
       setPerson(data as Person);
     } catch (error) {
       // TODO: if 404, redirect to 404 page
+      // TODO: create toast notification to show error
       console.error('Search error:', error);
     } finally {
       setIsSearching(false);

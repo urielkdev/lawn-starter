@@ -1,7 +1,6 @@
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { LogsModule } from './log/logs.module';
-import { MessageHandlerListener } from './message-handler/message-handler.listener';
 import { MessageHandlerModule } from './message-handler/message-handler.module';
 import { MoviesModule } from './movies/movies.module';
 import { PeopleModule } from './people/people.module';
@@ -20,10 +19,6 @@ import { providePrismaClientExceptionFilter } from 'nestjs-prisma';
     MessageHandlerModule,
   ],
   controllers: [AppController],
-  providers: [
-    AppService,
-    providePrismaClientExceptionFilter(),
-    MessageHandlerListener,
-  ],
+  providers: [AppService, providePrismaClientExceptionFilter()],
 })
 export class AppModule {}

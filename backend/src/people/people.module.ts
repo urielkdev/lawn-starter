@@ -9,5 +9,6 @@ import { SwapiApiModule } from 'src/swapi-api/swapi-api.module';
   controllers: [PeopleController],
   providers: [PeopleService, PeopleView],
   imports: [SwapiApiModule],
+  exports: [PeopleService],
 })
 export class PeopleModule {}
